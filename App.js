@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import * as Font from 'expo-font';
+import { AppLoading } from 'expo';
+
+import LoginScreen from './screens/LoginScreen';
+
+const getFonts = () => Font.loadAsync({
+  'ProximaNova-Regular': require('./fonts/ProximaNova-Regular.otf'),
+  'Arciform-Regular':require('./fonts/Arciform.otf')
+});
+
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  if(fontsLoaded){
+    return (
+     <LoginScreen />
+    );
+  }
+
+  else{
+    return(
+      <AppLoading
+      startAsync={getFonts}
+      onFinish={()=>setFontsLoaded(true)}
+      />
+    )
+  }
 }
 
 const styles = StyleSheet.create({
