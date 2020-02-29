@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/KushalShah1/LocationAutoClockInClockOut/issues"
   },
-  "homepage": "https://github.com/KushalShah1/LocationAutoClockInClockOut#readme"
+  "homepage": "https://github.com/KushalShah1/LocationAutoClockInClockOut#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.8.4",
+    "aws-api-gateway-client": "^0.3.3",
+    "aws-sdk": "^2.630.0",
+    "mysql": "^2.18.1"
+  }
 }

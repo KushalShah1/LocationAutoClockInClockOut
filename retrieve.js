@@ -17,7 +17,14 @@ exports.handler = (event, context, callback) => {
         if(err)
             callback(err,null);
         else
-            callback(null,data);
+            callback(null,{
+                "statusCode": 200,
+                "headers": {
+                    "my_header": "my_value"
+                },
+                "body": JSON.stringify(data),
+                "isBase64Encoded": false
+            });
     });
 }
 

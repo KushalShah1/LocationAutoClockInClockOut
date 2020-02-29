@@ -5,6 +5,7 @@ exports.handler = (event, context, callback) => {
     //prevent timeout from waiting event loop
     context.callbackWaitsForEmptyEventLoop = false;
     let pn=event.queryStringParameters.phoneNumber;
+    
     let params={
         Item:{
             PhoneNumber:pn,
@@ -18,8 +19,14 @@ exports.handler = (event, context, callback) => {
         if(err)
             callback(err,null);
         else
-            callback(null,data);
+            callback(null,{
+                "statusCode": 200,
+                "headers": {
+                    "my_header": "my_value"
+                },
+                "body": JSON.stringify(data),
+                "isBase64Encoded": false
+            });
     });
 }
 
-YpY2hRZaLkOzxXZHAZ6D+lid90Mji5RhNNKA5iM9

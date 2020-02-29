@@ -17,16 +17,28 @@ exports.handler = (event, context, callback) => {
         if(err)
             callback(err,null);
         else{
-            params=data;
-            let logs=params.Item.logs
-            logs.push(event.queryStringParameters.log);
-            params.Item.Logs=logs;
+            params={
+                Item:{
+                    PhoneNumber:event.queryStringParameters.phoneNumber,
+                    Logs:data.Item.Logs
+                },
+                TableName:"cLoc"
+            }
+            let logs=[event.queryStringParameters.log];
+            params.Item.Logs=logs.concat(params.Item.Logs);
 
             docClient.put(params,function(err,data1){
                 if(err)
                     callback(err,null);
                 else
-                    callback(null,data1)
+                    callback(null,{
+                        "statusCode": 200,
+                        "headers": {
+                            "my_header": "my_value"
+                        },
+                        "body": JSON.stringify(data1),
+                        "isBase64Encoded": false
+                    })
             })
         }
     });
